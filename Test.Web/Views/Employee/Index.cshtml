@@ -1,0 +1,41 @@
+﻿@model Test.Entities.ViewModels.ShowEmployeesViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <h3>Employees</h3>
+
+    <a class="btn btn-default btn-lg pull-right" asp-area="" asp-controller="Employee" asp-action="Create">Add new employee</a>
+
+    @{
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Deployment</th>
+                    <th>Basic Salary</th>
+                    <th>Full Salary</th>
+                    <th>Type</th>
+                    <th>Boss</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employe in Model.Employees)
+                {
+                    <tr>
+                        <td>@employe.Name</td>
+                        <td>@employe.DateDeployment</td>
+                        <td>@employe.GetBasicSalary()</td>
+                        <td>@employe.GetSalary()</td>
+                        <td>@(employe.EmployeeType.Title)</td>
+                        <td>@(employe.Chief != null ? employe.Chief.Name + "-" + employe.Chief.EmployeeType.Title : "None")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <h4>Salary all employees : @Model.Company.GetSalaryAllEmployees()</h4>
+
+</div>

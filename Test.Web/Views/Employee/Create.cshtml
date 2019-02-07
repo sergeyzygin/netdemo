@@ -1,0 +1,58 @@
+﻿@model Test.Entities.ViewModels.CreateEmployeeViewModel
+@using (Html.BeginForm("Create", "Employee", FormMethod.Post))
+{
+<div class="col-sm-12">
+    <div class="form-group">
+        <label class="control-label required" for="roleSelect">Select role</label>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <select id="roleSelect" asp-for="EmployeeTypeValue" class="form-control">
+                    <option value="" disabled selected>Select role</option>
+                    @foreach (var row in Model.EmployeeTypes)
+                    {
+                        <option value="@row.Value">@row.Title</option>
+                    }
+                </select>
+            </span>
+        </div>
+        <span asp-validation-for="EmployeeTypeValue"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label required" for="chiefSelect">Select chief</label>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <select id="chiefSelect" asp-for="ChiefId" class="form-control">
+                    <option value="" disabled selected>Select chief</option>
+                    @foreach (var row in Model.Employees)
+                    {
+                        <option value="@row.Id">@row.Name</option>
+                    }
+                </select>
+            </span>
+        </div>
+        <span asp-validation-for="ChiefId"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label required" for="nameInput">Name</label>
+        <input type="text" class="form-control" id="nameInput" asp-for="Name" placeholder="Name">
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label required" for="basicSelaryInput">Basic Salary</label>
+        <input type="text" class="form-control" id="basicSelaryInput" asp-for="BasicSalary" placeholder="Basic Salary">
+        <span asp-validation-for="BasicSalary"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label required" for="dateDeploymentInput">Date Deployment</label>
+        <input type="datetime-local" class="form-control" id="dateDeploymentInput" asp-for="DateDeployment" placeholder="Date Deployment">
+        <span asp-validation-for="DateDeployment"></span>
+    </div>
+
+</div>
+
+    <div class="col-sm-12 text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+}
